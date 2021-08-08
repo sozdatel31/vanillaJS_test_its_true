@@ -26,17 +26,19 @@
 }
 
 .visually-hidden {
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-content: flex-end;
-    align-items: stretch;
-    width: 636px;
-    height: 226px;
-    background: #FFFFFF;
+    overflow: hidden;
+    border: 0px;
+    /*display: -ms-flexbox;*/
+    /*display: -webkit-flex;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*flex-wrap: nowrap;*/
+    /*justify-content: center;*/
+    /*align-content: flex-end;*/
+    /*align-items: stretch;*/
+    width: 70%;
+    height: 50vh;
+    /*background: #FFFFFF;*/
 }
 .input {
     font-size: 16px;

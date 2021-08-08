@@ -1,4 +1,3 @@
-
 let container = document.createElement('div');
 container.className = "container";
 document.body.prepend(container);
@@ -10,11 +9,22 @@ container.insertAdjacentHTML('beforeend', '<input class="input" type="text" plac
 header.insertAdjacentHTML('afterbegin', '<p class="show_selected">Показать выбранное</p>');
 header.insertAdjacentHTML('afterbegin', '<p class="title1">Тендеры в роли поставщика</p>');
 
+console.log(document.getElementsByTagName("option"))
 
 const option = [].slice.call(document.getElementsByTagName("option"))
+const select = document.getElementsByTagName("select")
 
+console.log(select)
 
+option.forEach(m => {
 
+    m.style.paddingLeft = `${+m.dataset.level * 10}px`
+    m.dataset.level = m.dataset.level ? m.dataset.level : "1";
+    // m.setAttribute('onclick',
+    //     " selectShowOptions((+this.dataset.level), (+this.value))")
+    m.addEventListener("click", ()=> selectShowOptions((+m.dataset.level), (+m.value)))
+    m.insertAdjacentHTML('beforeend', '<div><input class="heyy" type="checkbox"/></div>');
+})
 
 const selectArray = [...document.getElementsByClassName("visually-hidden")]
 
@@ -23,40 +33,19 @@ console.log(selectArray)
 function selectShowOptions(dataLevel, value) {
     console.log(`value: ${value}`)
     console.log(`dataLevel: ${dataLevel}`)
+    let arr = [], bool = false
+    for (let i = value - 9; i < option.length; i++) {
+        if (+option[i].dataset.level <= dataLevel) {
+            break
+        }
+        arr.push(option[i])
 
-
+    }
+    arr.forEach((f, i) => {
+        if (!i)
+            f.style.display = f.style.display ? "" : "none"
+        f.style.display = arr[0].style.display ? "none" : ""
+    })
 }
 
-option.map(m=> m.setAttribute('onclick',
-    " selectShowOptions((+this.dataset.level), (+this.value))"))
-
-// selectArray.map(m=>m.setAttribute('onclick',
-//     " selectShowOptions((this), (this.parentNode.dataset.group), (this.value))"))
-
 console.log(option)
-
-
-
-
-
-
-
-// function selectShowOptions(dataLevel, dataGroup, value) {
-//     console.log(value)
-//     let checkboxArray = [...document.querySelectorAll(".container")];
-//     for (let i = value; i < option.length+10; i++) {
-//         let e = option[i]
-//         if (e.dataset.level == dataLevel) { // show/hide elements which are 1 level lower
-//             e.classList.toggle("hidden-option");
-//             checkboxArray[i].classList.toggle("hidden-option");
-//             e.style.paddingLeft = `${dataLevel * 10}px`;
-//             i == option.length - 1 ? i-- : i;
-//             if (dataLevel + 1 > option[i + 1].dataset.level) {
-//                 break;
-//             }
-//         } else if (!e.classList.contains("hidden-option") && e.dataset.level >= dataLevel && dataGroup === e.parentNode.dataset.group) { // hides all lower levels
-//             e.classList.add("hidden-option");
-//             checkboxArray[i].classList.add("hidden-option");
-//         }
-//     }
-// }
